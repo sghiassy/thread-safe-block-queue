@@ -1,0 +1,22 @@
+PODS:
+  - Expecta (1.0.5)
+  - Specta (1.0.5)
+  - thread-safe-block-queue (0.1.0)
+
+DEPENDENCIES:
+  - Expecta
+  - Specta
+  - thread-safe-block-queue (from `../`)
+
+EXTERNAL SOURCES:
+  thread-safe-block-queue:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
+  Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
+  thread-safe-block-queue: 78b3e0a760da544856fe5f8f59119711a5e1fd48
+
+PODFILE CHECKSUM: 6714a27b1f550013189e6e18c19f02f5606151d3
+
+COCOAPODS: 1.0.1

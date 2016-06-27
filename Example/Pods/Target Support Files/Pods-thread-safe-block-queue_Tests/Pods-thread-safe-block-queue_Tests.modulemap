@@ -1,0 +1,6 @@
+framework module Pods_thread_safe_block_queue_Tests {
+  umbrella header "Pods-thread-safe-block-queue_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

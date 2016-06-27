@@ -1,0 +1,22 @@
+{
+  "name": "thread-safe-block-queue",
+  "version": "0.1.0",
+  "summary": "A short description of thread-safe-block-queue.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/thread-safe-block-queue",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Shaheen Ghiassy": "shaheen.ghiassy@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/thread-safe-block-queue.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "thread-safe-block-queue/Classes/**/*"
+}
