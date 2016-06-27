@@ -1,0 +1,12 @@
+use_frameworks!
+
+target 'thread-safe-block-queue_Example' do
+  pod 'thread-safe-block-queue', :path => '../'
+
+  target 'thread-safe-block-queue_Tests' do
+    inherit! :search_paths
+
+    pod 'Specta'
+  pod 'Expecta'
+  end
+end
