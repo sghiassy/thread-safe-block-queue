@@ -7,6 +7,7 @@
 //
 
 #import "SCGAppDelegate.h"
+#import "ThreadSafeBlockQueue.h"
 
 @implementation SCGAppDelegate
 
