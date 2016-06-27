@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'thread-safe-block-queue'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of thread-safe-block-queue.'
+  s.summary          = 'An opinionted thread-safe FIFO queue designed for blocks'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,10 +18,10 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+This class is an opinionted thread-safe FIFO queue designed for blocks. It takes in blocks and queues them until it is messaged to purge and run all blocks. After the purge event, this data-structure will no longer queue future blocks and will instead run any block given to immediatly.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/thread-safe-block-queue'
+  s.homepage         = 'https://github.com/sghiassy/thread-safe-block-queue'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Shaheen Ghiassy' => 'shaheen.ghiassy@gmail.com' }
@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'thread-safe-block-queue/Classes/**/*'
-  
+
   # s.resource_bundles = {
   #   'thread-safe-block-queue' => ['thread-safe-block-queue/Assets/*.png']
   # }
