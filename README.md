@@ -1,6 +1,6 @@
 # thread-safe-block-queue
 
-[![CI Status](https://travis-ci.org/sghiassy/thread-safe-block-queue.svg?branch=master)](https://travis-ci.org/Shaheen Ghiassy/thread-safe-block-queue)
+[![CI Status](https://travis-ci.org/sghiassy/thread-safe-block-queue.svg?branch=master)](https://travis-ci.org/sghiassy/thread-safe-block-queue)
 [![Version](https://img.shields.io/cocoapods/v/thread-safe-block-queue.svg?style=flat)](http://cocoapods.org/pods/thread-safe-block-queue)
 [![License](https://img.shields.io/cocoapods/l/thread-safe-block-queue.svg?style=flat)](http://cocoapods.org/pods/thread-safe-block-queue)
 [![Platform](https://img.shields.io/cocoapods/p/thread-safe-block-queue.svg?style=flat)](http://cocoapods.org/pods/thread-safe-block-queue)
@@ -19,6 +19,10 @@ pod "thread-safe-block-queue"
 ```
 
 ## Description
+
+Thread Safe Block Queue (TSBQ) is a special data structure I needed once. Much like NSOperation, it provides a FIFO queue for running blocks. The queue is initially suspended and later is resumed by the developer.
+
+What TSBQ offers beyond an NSOperationQueue is ability to replay the blocks given to TSBQ. This unique feature was necessary in a project I was working on and I'm making it available publicly since its highly tested and thread-safe.
 
 ```
 //   ┌────────────────────────────────┐
