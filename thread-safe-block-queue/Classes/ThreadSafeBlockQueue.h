@@ -33,5 +33,6 @@ typedef int (^RNCBlock)(void);
  *  any future blocks will no longer be queued.
  */
 - (void)enQueueAllBlocksAndRun;
+- (void)enQueueAllBlocksAndRunOnComplete:(void(^)(void))onComplete;
 
 @end

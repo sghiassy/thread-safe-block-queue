@@ -64,7 +64,17 @@
 }
 
 - (void)enQueueAllBlocksAndRun {
-    [self startQueue];
+    if (self.isSuspended == YES) {
+        [self startQueue];
+    }
+}
+
+- (void)enQueueAllBlocksAndRunOnComplete:(void(^)(void))onComplete {
+    if (onComplete) {
+        [self queueBlock:onComplete];
+    }
+
+    [self enQueueAllBlocksAndRun];
 }
 
 
