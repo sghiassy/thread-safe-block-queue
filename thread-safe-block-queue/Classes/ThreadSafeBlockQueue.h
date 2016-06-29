@@ -10,6 +10,12 @@
 
 typedef int (^RNCBlock)(void);
 
+typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
+    ThreadSafeBlockQueueStopped,
+    ThreadSafeBlockQueueRunning,
+    ThreadSafeBlockQueueRestarting
+};
+
 /**
  *  This class is an opinionted thread-safe FIFO queue designed for blocks.
  *  It takes in blocks and queues them until it is messaged to purge and run
@@ -17,6 +23,8 @@ typedef int (^RNCBlock)(void);
  *  queue future blocks and will instead run any block given to immediatly.
  */
 @interface ThreadSafeBlockQueue : NSObject
+
+@property (atomic, readonly, assign) ThreadSafeBlockQueueStates currentState;
 
 /**
  *  Queue a block to be run later. If the data structure has already
@@ -26,6 +34,7 @@ typedef int (^RNCBlock)(void);
  *  @param block Block to be run
  */
 - (void)queueBlock:(void(^)(void))block;
+- (void)queueBlock:(void(^)(void))block shouldReplay:(BOOL)shouldReplay;
 
 /**
  *  Message the data-structure to run all blocks that are currently in the queue.
@@ -34,5 +43,10 @@ typedef int (^RNCBlock)(void);
  */
 - (void)enQueueAllBlocksAndRun;
 - (void)enQueueAllBlocksAndRunOnComplete:(void(^)(void))onComplete;
+
+/**
+ *  Message the data-structure to replay all blocks
+ */
+- (void)replay;
 
 @end

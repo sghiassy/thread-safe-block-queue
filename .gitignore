@@ -25,6 +25,7 @@ xcuserdata
 project.xcworkspace
 Groupon.xcworkspace/xcshareddata/Groupon.xccheckout
 *.xcscmblueprint
+*.xcuserstate
 
 # Bundler
 .bundle
