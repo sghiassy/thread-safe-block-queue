@@ -27,6 +27,8 @@ Groupon.xcworkspace/xcshareddata/Groupon.xccheckout
 *.xcscmblueprint
 *.xcuserstate
 
+npm-debug.log
+
 # Bundler
 .bundle
 
