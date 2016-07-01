@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^TSBlock)(void);
+typedef int (^RNCBlock)(void);
 
 typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
-    ThreadSafeBlockQueueStateStopped,
-    ThreadSafeBlockQueueStateRunning,
+    ThreadSafeBlockQueueStopped,
+    ThreadSafeBlockQueueRunning,
+    ThreadSafeBlockQueueRestarting
 };
 
 /**
@@ -23,14 +24,7 @@ typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
  */
 @interface ThreadSafeBlockQueue : NSObject
 
-@property (nonatomic, readonly, copy) NSString *name;
 @property (atomic, readonly, assign) ThreadSafeBlockQueueStates currentState;
-
-/**
- * Designated Initailzer
- * @param name is used for debugging
- */
-- (instancetype)initWithName:(NSString *)name;
 
 /**
  *  Queue a block to be run later. If the data structure has already
@@ -39,17 +33,16 @@ typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
  *
  *  @param block Block to be run
  */
-- (void)queueBlock:(TSBlock)block;
-- (void)queueBlock:(TSBlock)block shouldReplay:(BOOL)shouldReplay;
-- (void)queue:(NSString *)name shouldReplay:(BOOL)shouldReplay block:(TSBlock)block;
+- (void)queueBlock:(void(^)(void))block;
+- (void)queueBlock:(void(^)(void))block shouldReplay:(BOOL)shouldReplay;
 
 /**
  *  Message the data-structure to run all blocks that are currently in the queue.
- *  This message also transitions the data-structure to run immediatly mode, whereby
+ *  This message also transitions the data-structure to runImmediatly mode, whereby
  *  any future blocks will no longer be queued.
  */
-- (void)startQueue;
-- (void)startQueueOnComplete:(TSBlock)onComplete;
+- (void)enQueueAllBlocksAndRun;
+- (void)enQueueAllBlocksAndRunOnComplete:(void(^)(void))onComplete;
 
 /**
  *  Message the data-structure to replay all blocks

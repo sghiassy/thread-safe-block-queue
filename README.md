@@ -18,19 +18,6 @@ it, simply add the following line to your Podfile:
 pod "thread-safe-block-queue"
 ```
 
-Install the Pod
-
-```bash
-pod install
-```
-
-Then add to your code
-
-```objc
-#import <thread-safe-block-queue/ThreadSafeBlockQueue.h>
-ThreadSafeBlockQueue *queue = [[ThreadSafeBlockQueue alloc] init];
-```
-
 ## Description
 
 Thread Safe Block Queue (TSBQ) is a special data structure I needed once. Much like NSOperation, it provides a FIFO queue for running blocks. The queue is initially suspended and later is resumed by the developer.

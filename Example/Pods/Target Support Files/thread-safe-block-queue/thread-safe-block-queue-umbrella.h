@@ -1,6 +1,5 @@
 #import <UIKit/UIKit.h>
 
-#import "ThreadSafeBlockModel.h"
 #import "ThreadSafeBlockQueue.h"
 
 FOUNDATION_EXPORT double thread_safe_block_queueVersionNumber;
