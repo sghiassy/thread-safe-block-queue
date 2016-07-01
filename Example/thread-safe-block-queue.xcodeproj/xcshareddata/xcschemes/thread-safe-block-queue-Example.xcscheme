@@ -37,11 +37,6 @@
                BlueprintName = "thread-safe-block-queue_Tests"
                ReferencedContainer = "container:thread-safe-block-queue.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "DescriptionTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

@@ -87,11 +87,17 @@
 
 #pragma mark - Queue Methods
 
-- (void)queueBlock:(void(^)(void))block {
+// Porcelain
+- (void)queueBlock:(TSBlock)block {
     [self queueBlock:block shouldReplay:YES];
 }
 
-- (void)queueBlock:(void(^)(void))block shouldReplay:(BOOL)shouldReplay {
+// Porcelain
+- (void)queueBlock:(TSBlock)block shouldReplay:(BOOL)shouldReplay {
+    [self queueBlock:@"" shouldReplay:shouldReplay withBlock:block];
+}
+
+- (void)queueBlock:(NSString *)name shouldReplay:(BOOL)shouldReplay withBlock:(TSBlock)block {
     if (block == nil) {
         return; // return early if we weren't provided a block to run
     }
@@ -99,7 +105,8 @@
     BOOL isRestarting = self.currentState == ThreadSafeBlockQueueRestarting;
 
     if (shouldReplay) {
-        [self.blocks addObject:[block copy]];
+        ThreadSafeBlockModel *tsBlock = [[ThreadSafeBlockModel alloc] initWithName:name shouldReplay:shouldReplay andBlock:block];
+        [self.blocks addObject:tsBlock];
     }
 
     // If we're currently in the process of restarting, then we don't need
@@ -161,8 +168,8 @@
 
     do {
         while (i <= count) {
-            void (^block)(void) = [self.blocks objectAtIndex:i];
-            dispatch_async(self.serialQueue, block);
+            ThreadSafeBlockModel *tsBlock = (ThreadSafeBlockModel *)[self.blocks objectAtIndex:i];
+            dispatch_async(self.serialQueue, tsBlock.block);
             i++;
         }
 
@@ -172,6 +179,19 @@
     } while (moreBlocksHaveBeenAdded == YES);
 
     [self startQueue];
+}
+
+#pragma mark - Debugging
+
+- (NSString *)description {
+    NSString *description = [NSString stringWithFormat:@"Queue:%@", self.name];
+
+    for (NSUInteger i = 0; i < self.blocks.count; i++) {
+        ThreadSafeBlockModel *tsBlock = (ThreadSafeBlockModel *)[self.blocks objectAtIndex:i];
+        description = [NSString stringWithFormat:@"%@\nBlock:%@", description, tsBlock.name];
+    }
+
+    return description;
 }
 
 

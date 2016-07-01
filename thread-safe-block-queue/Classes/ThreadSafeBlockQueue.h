@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef int (^RNCBlock)(void);
+typedef void (^TSBlock)(void);
 
 typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
     ThreadSafeBlockQueueStopped,
@@ -36,16 +36,17 @@ typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
  *
  *  @param block Block to be run
  */
-- (void)queueBlock:(void(^)(void))block;
-- (void)queueBlock:(void(^)(void))block shouldReplay:(BOOL)shouldReplay;
+- (void)queueBlock:(TSBlock)block;
+- (void)queueBlock:(TSBlock)block shouldReplay:(BOOL)shouldReplay;
+- (void)queueBlock:(NSString *)name shouldReplay:(BOOL)shouldReplay withBlock:(TSBlock)block;
 
 /**
  *  Message the data-structure to run all blocks that are currently in the queue.
- *  This message also transitions the data-structure to runImmediatly mode, whereby
+ *  This message also transitions the data-structure to run immediatly mode, whereby
  *  any future blocks will no longer be queued.
  */
 - (void)enQueueAllBlocks;
-- (void)enQueueAllBlocksAndRunOnComplete:(void(^)(void))onComplete;
+- (void)enQueueAllBlocksAndRunOnComplete:(TSBlock)onComplete;
 
 /**
  *  Message the data-structure to replay all blocks
