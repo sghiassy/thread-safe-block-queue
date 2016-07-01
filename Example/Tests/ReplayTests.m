@@ -28,7 +28,7 @@
     [super tearDown];
 }
 
-- (void)itCanReplayTheQueue {
+- (void)testItCanReplayTheQueue {
     XCTestExpectation *expectation = [self expectationWithDescription:@"High Expectations"];
 
     __block CGFloat count = -1.0f;
@@ -88,7 +88,7 @@
     }];
 }
 
-- (void)replayCanBeCalledMultipleTimes {
+- (void)testReplayCanBeCalledMultipleTimes {
     XCTestExpectation *expectation = [self expectationWithDescription:@"High Expectations"];
 
     // Async example blocks need to invoke done() callback.

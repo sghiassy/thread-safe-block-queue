@@ -28,11 +28,11 @@
     [super tearDown];
 }
 
-- (void)itCanBeInstantiated {
+- (void)testItCanBeInstantiated {
     expect(self.queue).willNot.beNil();
 }
 
-- (void)itCanRunBlocks {
+- (void)testItCanRunBlocks {
     __block BOOL blockWasRun = NO;
 
     [self.queue queueBlock:^{
@@ -50,7 +50,7 @@
     }];
 }
 
-- (void)messageStartQueueMultipleTimesWillNotCrash {
+- (void)testMessagingStartQueueMultipleTimesWillNotCrash {
     __block BOOL blockWasRun = NO;
 
     [self.queue queueBlock:^{
@@ -64,7 +64,7 @@
     [self.queue startQueue];
 }
 
-- (void)ttWillRunBlocksInOrder {
+- (void)tesItWillRunBlocksInOrder {
     __block CGFloat count = 0.0f;
 
     [self.queue queueBlock:^{
@@ -94,7 +94,7 @@
     [self.queue startQueue];
 }
 
-- (void)itWillRunBlocksImmediatlyWhenTheQueueIsInRunMode {
+- (void)testItWillRunBlocksImmediatlyWhenTheQueueIsInRunMode {
     XCTestExpectation *expectation = [self expectationWithDescription:@"High Expectations"];
 
     __block CGFloat count = 0.0f;
@@ -136,7 +136,7 @@
     }];
 }
 
-- (void)titCanHaveBlocksThatAreRunOnlyOnce {
+- (void)testItCanHaveBlocksThatAreRunOnlyOnce {
     XCTestExpectation *expectation = [self expectationWithDescription:@"High Expectations"];
 
     // Async example blocks need to invoke done() callback.
