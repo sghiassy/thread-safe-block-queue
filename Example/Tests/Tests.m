@@ -38,12 +38,11 @@ describe(@"ThreadSafeBlockQueue", ^{
 
         expect(blockWasRun).to.equal(NO);
 
-
         [queue queueBlock:^{
             expect(blockWasRun).to.equal(YES);
         }];
 
-        [queue enQueueAllBlocksAndRunOnComplete:^{
+        [queue startQueueOnComplete:^{
             expect(blockWasRun).to.equal(YES);
         }];
     });
@@ -56,10 +55,10 @@ describe(@"ThreadSafeBlockQueue", ^{
         }];
 
         expect(blockWasRun).to.equal(NO);
-        [queue enQueueAllBlocksAndRun];
-        [queue enQueueAllBlocksAndRun];
-        [queue enQueueAllBlocksAndRun];
-        [queue enQueueAllBlocksAndRun];
+        [queue startQueue];
+        [queue startQueue];
+        [queue startQueue];
+        [queue startQueue];
     });
 
     it(@"will run the blocks in order", ^{
@@ -89,7 +88,7 @@ describe(@"ThreadSafeBlockQueue", ^{
             expect(count).to.equal(15.4f);
         }];
 
-        [queue enQueueAllBlocksAndRun];
+        [queue startQueue];
     });
 
     it(@"will run blocks immediatly after the queue has been enqueued", ^{
@@ -106,7 +105,7 @@ describe(@"ThreadSafeBlockQueue", ^{
                 count += 3.3f;
             }];
 
-            [queue enQueueAllBlocksAndRun];
+            [queue startQueue];
 
             [queue queueBlock:^{
                 expect(count).to.equal(5.5f);
@@ -122,6 +121,8 @@ describe(@"ThreadSafeBlockQueue", ^{
                 expect(count).to.equal(15.4f);
                 done();
             }];
+
+            [queue startQueue];
         });
     });
 
@@ -159,12 +160,12 @@ describe(@"ThreadSafeBlockQueue", ^{
                 expect(count).to.equal(15.4f);
             }];
 
-            expect(queue.currentState).to.equal(ThreadSafeBlockQueueStopped);
+            expect(queue.currentState).to.equal(ThreadSafeBlockQueueStateStopped);
 
-            [queue enQueueAllBlocksAndRunOnComplete:^{
+            [queue startQueueOnComplete:^{
                 expect(called).to.equal(1);
                 expect(count).to.equal(15.4f);
-                expect(queue.currentState).to.equal(ThreadSafeBlockQueueRunning);
+                expect(queue.currentState).to.equal(ThreadSafeBlockQueueStateRunning);
                 [queue replay];
                 [queue queueBlock:^{
                     expect(count).to.equal(15.4f);
@@ -216,7 +217,7 @@ describe(@"ThreadSafeBlockQueue", ^{
                 expect(count).to.equal(15.4f);
             }];
 
-            [queue enQueueAllBlocksAndRunOnComplete:^{
+            [queue startQueueOnComplete:^{
                 expect(called).to.equal(1);
                 expect(count).to.equal(15.4f);
                 [queue replay];
@@ -273,7 +274,7 @@ describe(@"ThreadSafeBlockQueue", ^{
                 expect(count).to.equal(15.4f);
             }];
 
-            [queue enQueueAllBlocksAndRunOnComplete:^{
+            [queue startQueueOnComplete:^{
                 expect(called).to.equal(1);
                 expect(count).to.equal(15.4f);
                 [queue replay];
@@ -318,16 +319,16 @@ describe(@"ThreadSafeBlockQueue", ^{
                 expect(count).to.equal(2.2f);
             }];
 
-            [queue enQueueAllBlocksAndRunOnComplete:^{
+            [queue startQueueOnComplete:^{
                 dispatch_async(concurrentQueue, ^{
-                    [queue enQueueAllBlocksAndRunOnComplete:^{
+                    [queue startQueueOnComplete:^{
                         expect(count).to.equal(2.2f);
                         done();
                     }];
                 });
 
                 dispatch_async(concurrentQueue, ^{
-                    [queue enQueueAllBlocksAndRunOnComplete:^{
+                    [queue startQueueOnComplete:^{
                         expect(count).to.equal(2.2f);
                         done();
                     }];
@@ -339,13 +340,13 @@ describe(@"ThreadSafeBlockQueue", ^{
                 });
 
                 dispatch_async(concurrentQueue, ^{
-                    [queue enQueueAllBlocksAndRunOnComplete:^{
+                    [queue startQueueOnComplete:^{
                         expect(count).to.equal(2.2f);
                     }];
                 });
 
                 dispatch_async(concurrentQueue, ^{
-                    [queue enQueueAllBlocksAndRunOnComplete:^{
+                    [queue startQueueOnComplete:^{
                         expect(count).to.equal(2.2f);
                         done();
                     }];
