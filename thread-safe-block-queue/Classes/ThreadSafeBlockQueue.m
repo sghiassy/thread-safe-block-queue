@@ -7,16 +7,21 @@
 //
 
 #import "ThreadSafeBlockQueue.h"
+#import "ThreadSafeBlockModel.h"
 
 @interface ThreadSafeBlockQueue ()
 
 // Config
 @property (nonatomic, readwrite, copy) NSString *name;
 
-@property (nonatomic, strong) dispatch_queue_t serialQueue; // the queue that all operations are run on inside this datastructure
-@property (atomic, readwrite, assign) ThreadSafeBlockQueueStates currentState;
-
+// Objects
 @property (nonatomic, strong) NSMutableArray *blocks;
+
+// Threads
+@property (nonatomic, strong) dispatch_queue_t serialQueue; // the queue that all operations are run on inside this datastructure
+
+// State
+@property (atomic, readwrite, assign) ThreadSafeBlockQueueStates currentState;
 
 @end
 
@@ -33,9 +38,8 @@
     self = [super init];
 
     if (self) {
-        _name = [name copy];
-        
         // Instantiate Objects
+        _name = [name copy];
         _currentState = ThreadSafeBlockQueueRunning;
         _serialQueue = dispatch_queue_create("com.Groupon.ThreadSafeBlockQueue", DISPATCH_QUEUE_SERIAL);
         _blocks = [[NSMutableArray alloc] init];

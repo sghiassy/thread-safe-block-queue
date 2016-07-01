@@ -88,6 +88,9 @@
 		9D1084E06B272B4C5A064BAFE705935B /* SPTExample.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F820C46D336F1E6EB733BFC4374C51 /* SPTExample.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D7BF17387EEE19E2614EFC073148F0F /* SPTSharedExampleGroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C1DD363D5966F42C4D802641B4CEEA /* SPTSharedExampleGroups.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A8C4D70CDF5B8F8422C0CF918612417D /* Specta.h in Headers */ = {isa = PBXBuildFile; fileRef = D61BC75AB795DFB7AE9CF80D79C1B530 /* Specta.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAACA75B1D27352500AD872A /* ThreadSafeBlockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACA7581D27351E00AD872A /* ThreadSafeBlockModel.m */; };
+		AAACA75C1D27352600AD872A /* ThreadSafeBlockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACA7581D27351E00AD872A /* ThreadSafeBlockModel.m */; };
+		AAACA75D1D27352B00AD872A /* ThreadSafeBlockModel.h in Headers */ = {isa = PBXBuildFile; fileRef = AAACA7571D27351E00AD872A /* ThreadSafeBlockModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAF92DD91D21D70900B468AA /* ThreadSafeBlockQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F4ED878872B3E3D53E94E5CB900EB3 /* ThreadSafeBlockQueue.m */; };
 		AB7726DEE8B8F5F4F07683CF096BD678 /* SPTGlobalBeforeAfterEach.h in Headers */ = {isa = PBXBuildFile; fileRef = D6CF3903D943792CF71D2E59A5FE6602 /* SPTGlobalBeforeAfterEach.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEBC6AC2ECDFBB4BCCCCFE09DED2FC87 /* SpectaUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687931B86D55C2A3B7570964EEFDEAB /* SpectaUtility.m */; };
@@ -251,6 +254,8 @@
 		A86F3AD0DA9EBA1477CE8FB38352EEBE /* thread-safe-block-queue-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "thread-safe-block-queue-umbrella.h"; sourceTree = "<group>"; };
 		AA2364F990290F821A2CB900471FBE2A /* Specta.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Specta.modulemap; sourceTree = "<group>"; };
 		AA2D86876643D2803FBF58BD3C0BE625 /* EXPMatchers+beInTheRangeOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beInTheRangeOf.h"; path = "Expecta/Matchers/EXPMatchers+beInTheRangeOf.h"; sourceTree = "<group>"; };
+		AAACA7571D27351E00AD872A /* ThreadSafeBlockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadSafeBlockModel.h; sourceTree = "<group>"; };
+		AAACA7581D27351E00AD872A /* ThreadSafeBlockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadSafeBlockModel.m; sourceTree = "<group>"; };
 		AAC405455F8E20BD0434D9D3E3D2879A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		ABE29471E8953384B36B17DC33FB8C75 /* XCTestCase+Specta.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "XCTestCase+Specta.m"; path = "Specta/Specta/XCTestCase+Specta.m"; sourceTree = "<group>"; };
 		AD9A1402E8720FD00C46040083DC9692 /* EXPMatchers+beIdenticalTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beIdenticalTo.h"; path = "Expecta/Matchers/EXPMatchers+beIdenticalTo.h"; sourceTree = "<group>"; };
@@ -394,6 +399,8 @@
 			children = (
 				1DB4B34B7394DA7BE873C43DC34C9A2F /* ThreadSafeBlockQueue.h */,
 				34F4ED878872B3E3D53E94E5CB900EB3 /* ThreadSafeBlockQueue.m */,
+				AAACA7571D27351E00AD872A /* ThreadSafeBlockModel.h */,
+				AAACA7581D27351E00AD872A /* ThreadSafeBlockModel.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -640,6 +647,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EDFCEC4E0881BFAEEEAB57248BF5C8F /* thread-safe-block-queue-umbrella.h in Headers */,
+				AAACA75D1D27352B00AD872A /* ThreadSafeBlockModel.h in Headers */,
 				2C572D192999EAA883224E8106C58448 /* ThreadSafeBlockQueue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -876,6 +884,7 @@
 			files = (
 				AAF92DD91D21D70900B468AA /* ThreadSafeBlockQueue.m in Sources */,
 				B43AB7789CBCDCCEC42AC20D814DB7B3 /* Pods-thread-safe-block-queue_Tests-dummy.m in Sources */,
+				AAACA75B1D27352500AD872A /* ThreadSafeBlockModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,6 +894,7 @@
 			files = (
 				FC8E5A9A46B4626D7DBB325A62BE5C7C /* thread-safe-block-queue-dummy.m in Sources */,
 				8A20570E7F176F922CBA690D99090052 /* ThreadSafeBlockQueue.m in Sources */,
+				AAACA75C1D27352600AD872A /* ThreadSafeBlockModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
