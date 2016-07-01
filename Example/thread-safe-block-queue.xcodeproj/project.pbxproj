@@ -22,10 +22,10 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6B772364D55CD30508629175 /* Pods_thread_safe_block_queue_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11BE312C861E70D68ED4E1F9 /* Pods_thread_safe_block_queue_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		AA5AE26D1D271C2C003F9A67 /* MultiThreads.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AE26C1D271C2C003F9A67 /* MultiThreads.m */; };
-		AA5AE26F1D271CF7003F9A67 /* BasicOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AE26E1D271CF7003F9A67 /* BasicOperations.m */; };
-		AAED0BA31D270EA400BEFFC0 /* DescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED0BA21D270EA400BEFFC0 /* DescriptionTests.m */; };
-		AAED0BA51D27173700BEFFC0 /* ReplayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED0BA41D27173700BEFFC0 /* ReplayTests.m */; };
+		AAACA7531D27313A00AD872A /* BasicOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACA74F1D27313A00AD872A /* BasicOperations.m */; };
+		AAACA7541D27313A00AD872A /* DescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACA7501D27313A00AD872A /* DescriptionTests.m */; };
+		AAACA7551D27313A00AD872A /* MultiThreads.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACA7511D27313A00AD872A /* MultiThreads.m */; };
+		AAACA7561D27313A00AD872A /* ReplayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAACA7521D27313A00AD872A /* ReplayTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,10 +67,10 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A22DF3ACD4ABD80A721707F3 /* Pods-thread-safe-block-queue_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thread-safe-block-queue_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-thread-safe-block-queue_Tests/Pods-thread-safe-block-queue_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA35F60636152345BAF15609 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		AA5AE26C1D271C2C003F9A67 /* MultiThreads.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiThreads.m; sourceTree = "<group>"; };
-		AA5AE26E1D271CF7003F9A67 /* BasicOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicOperations.m; sourceTree = "<group>"; };
-		AAED0BA21D270EA400BEFFC0 /* DescriptionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionTests.m; sourceTree = "<group>"; };
-		AAED0BA41D27173700BEFFC0 /* ReplayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplayTests.m; sourceTree = "<group>"; };
+		AAACA74F1D27313A00AD872A /* BasicOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicOperations.m; sourceTree = "<group>"; };
+		AAACA7501D27313A00AD872A /* DescriptionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionTests.m; sourceTree = "<group>"; };
+		AAACA7511D27313A00AD872A /* MultiThreads.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiThreads.m; sourceTree = "<group>"; };
+		AAACA7521D27313A00AD872A /* ReplayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplayTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,10 +173,10 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				AA5AE26E1D271CF7003F9A67 /* BasicOperations.m */,
-				AAED0BA41D27173700BEFFC0 /* ReplayTests.m */,
-				AA5AE26C1D271C2C003F9A67 /* MultiThreads.m */,
-				AAED0BA21D270EA400BEFFC0 /* DescriptionTests.m */,
+				AAACA74F1D27313A00AD872A /* BasicOperations.m */,
+				AAACA7501D27313A00AD872A /* DescriptionTests.m */,
+				AAACA7511D27313A00AD872A /* MultiThreads.m */,
+				AAACA7521D27313A00AD872A /* ReplayTests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -409,10 +409,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAED0BA51D27173700BEFFC0 /* ReplayTests.m in Sources */,
-				AAED0BA31D270EA400BEFFC0 /* DescriptionTests.m in Sources */,
-				AA5AE26F1D271CF7003F9A67 /* BasicOperations.m in Sources */,
-				AA5AE26D1D271C2C003F9A67 /* MultiThreads.m in Sources */,
+				AAACA7561D27313A00AD872A /* ReplayTests.m in Sources */,
+				AAACA7541D27313A00AD872A /* DescriptionTests.m in Sources */,
+				AAACA7531D27313A00AD872A /* BasicOperations.m in Sources */,
+				AAACA7551D27313A00AD872A /* MultiThreads.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

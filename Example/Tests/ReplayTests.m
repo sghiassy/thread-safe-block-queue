@@ -63,12 +63,12 @@
         expect(count).to.equal(15.4f);
     }];
 
-    expect(self.queue.currentState).to.equal(ThreadSafeBlockQueueStateStopped);
+    expect(self.queue.currentState).to.equal(ThreadSafeBlockQueueStopped);
 
-    [self.queue startQueueOnComplete:^{
+    [self.queue enQueueAllBlocksAndRunOnComplete:^{
         expect(called).to.equal(1);
         expect(count).to.equal(15.4f);
-        expect(self.queue.currentState).to.equal(ThreadSafeBlockQueueStateRunning);
+        expect(self.queue.currentState).to.equal(ThreadSafeBlockQueueRunning);
         [self.queue replay];
         [self.queue queueBlock:^{
             expect(count).to.equal(15.4f);
@@ -124,7 +124,7 @@
         expect(count).to.equal(15.4f);
     }];
 
-    [self.queue startQueueOnComplete:^{
+    [self.queue enQueueAllBlocksAndRunOnComplete:^{
         expect(called).to.equal(1);
         expect(count).to.equal(15.4f);
         [self.queue replay];

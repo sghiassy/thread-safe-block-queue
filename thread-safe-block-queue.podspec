@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'thread-safe-block-queue'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'An opinionted thread-safe FIFO queue designed for blocks'
 
 # This description is used to generate tags and improve search results.
@@ -38,5 +38,5 @@ This class is an opinionted thread-safe FIFO queue designed for blocks. It takes
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'thread-safe-block-queue', '~> 0.1.1'
+  # s.dependency 'AFNetworking', '~> 2.3'
 end

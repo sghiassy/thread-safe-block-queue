@@ -91,8 +91,8 @@
 		9D7BF17387EEE19E2614EFC073148F0F /* SPTSharedExampleGroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C1DD363D5966F42C4D802641B4CEEA /* SPTSharedExampleGroups.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F42DAB45D61B06B4B1DA70713E5EFF4 /* ThreadSafeBlockModel.h in Headers */ = {isa = PBXBuildFile; fileRef = E9F1D1F75C1D319440E18197C5770CC6 /* ThreadSafeBlockModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A8C4D70CDF5B8F8422C0CF918612417D /* Specta.h in Headers */ = {isa = PBXBuildFile; fileRef = D61BC75AB795DFB7AE9CF80D79C1B530 /* Specta.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA79986C1D25F4AB00BA2EE7 /* ThreadSafeBlockQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ECF1F630015E93B92208EA95C2E92 /* ThreadSafeBlockQueue.m */; };
-		AA79986D1D25F4AF00BA2EE7 /* ThreadSafeBlockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A9C4E3253FBEF902721CB2BFDE47D9 /* ThreadSafeBlockModel.m */; };
+		AAACA7601D273A1900AD872A /* ThreadSafeBlockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A9C4E3253FBEF902721CB2BFDE47D9 /* ThreadSafeBlockModel.m */; };
+		AAACA7611D273A1B00AD872A /* ThreadSafeBlockQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ECF1F630015E93B92208EA95C2E92 /* ThreadSafeBlockQueue.m */; };
 		AB7726DEE8B8F5F4F07683CF096BD678 /* SPTGlobalBeforeAfterEach.h in Headers */ = {isa = PBXBuildFile; fileRef = D6CF3903D943792CF71D2E59A5FE6602 /* SPTGlobalBeforeAfterEach.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AEBC6AC2ECDFBB4BCCCCFE09DED2FC87 /* SpectaUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687931B86D55C2A3B7570964EEFDEAB /* SpectaUtility.m */; };
 		AF1F46668D4591602887998C6E9C10AD /* EXPMatchers+beCloseTo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B6DF8F89EC26F944197244B9F2AAB15 /* EXPMatchers+beCloseTo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -604,10 +604,10 @@
 		DB4621969952ED33D56F3B71FD662D7D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				40D227062967ADE776E6B0CACCBC0A9A /* ThreadSafeBlockQueue.h */,
-				2B9ECF1F630015E93B92208EA95C2E92 /* ThreadSafeBlockQueue.m */,
 				E9F1D1F75C1D319440E18197C5770CC6 /* ThreadSafeBlockModel.h */,
 				B3A9C4E3253FBEF902721CB2BFDE47D9 /* ThreadSafeBlockModel.m */,
+				40D227062967ADE776E6B0CACCBC0A9A /* ThreadSafeBlockQueue.h */,
+				2B9ECF1F630015E93B92208EA95C2E92 /* ThreadSafeBlockQueue.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -882,9 +882,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA79986C1D25F4AB00BA2EE7 /* ThreadSafeBlockQueue.m in Sources */,
+				AAACA7601D273A1900AD872A /* ThreadSafeBlockModel.m in Sources */,
+				AAACA7611D273A1B00AD872A /* ThreadSafeBlockQueue.m in Sources */,
 				B43AB7789CBCDCCEC42AC20D814DB7B3 /* Pods-thread-safe-block-queue_Tests-dummy.m in Sources */,
-				AA79986D1D25F4AF00BA2EE7 /* ThreadSafeBlockModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

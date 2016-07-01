@@ -50,15 +50,15 @@
         expect(count).to.equal(2.2f);
     }];
 
-    [self.queue startQueueOnComplete:^{
+    [self.queue enQueueAllBlocksAndRunOnComplete:^{
         dispatch_async(concurrentQueue, ^{
-            [self.queue startQueueOnComplete:^{
+            [self.queue enQueueAllBlocksAndRunOnComplete:^{
                 expect(count).to.equal(2.2f);
             }];
         });
 
         dispatch_async(concurrentQueue, ^{
-            [self.queue startQueueOnComplete:^{
+            [self.queue enQueueAllBlocksAndRunOnComplete:^{
                 expect(count).to.equal(2.2f);
             }];
         });
@@ -69,13 +69,13 @@
         });
 
         dispatch_async(concurrentQueue, ^{
-            [self.queue startQueueOnComplete:^{
+            [self.queue enQueueAllBlocksAndRunOnComplete:^{
                 expect(count).to.equal(2.2f);
             }];
         });
 
         dispatch_async(concurrentQueue, ^{
-            [self.queue startQueueOnComplete:^{
+            [self.queue enQueueAllBlocksAndRunOnComplete:^{
                 expect(count).to.equal(2.2f);
                 [expectation fulfill];
             }];
