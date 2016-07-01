@@ -10,6 +10,9 @@
 
 @interface ThreadSafeBlockQueue ()
 
+// Config
+@property (nonatomic, readwrite, copy) NSString *name;
+
 @property (nonatomic, strong) dispatch_queue_t serialQueue; // the queue that all operations are run on inside this datastructure
 @property (atomic, readwrite, assign) ThreadSafeBlockQueueStates currentState;
 
@@ -23,9 +26,15 @@
 #pragma mark - Object Lifecycle
 
 - (instancetype)init {
+    return [self initWithName:@""];
+}
+
+- (instancetype)initWithName:(NSString *)name {
     self = [super init];
 
     if (self) {
+        _name = [name copy];
+        
         // Instantiate Objects
         _currentState = ThreadSafeBlockQueueRunning;
         _serialQueue = dispatch_queue_create("com.Groupon.ThreadSafeBlockQueue", DISPATCH_QUEUE_SERIAL);
@@ -113,7 +122,7 @@
     }
 }
 
-- (void)enQueueAllBlocksAndRun {
+- (void)enQueueAllBlocks {
     BOOL isRestarting = self.currentState == ThreadSafeBlockQueueRestarting;
 
     if (isRestarting) {
@@ -128,7 +137,7 @@
         [self queueBlock:onComplete shouldReplay:NO];
     }
 
-    [self enQueueAllBlocksAndRun];
+    [self enQueueAllBlocks];
 }
 
 #pragma mark - Restart

@@ -24,7 +24,10 @@ typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
  */
 @interface ThreadSafeBlockQueue : NSObject
 
+@property (nonatomic, readonly, copy) NSString *name;
 @property (atomic, readonly, assign) ThreadSafeBlockQueueStates currentState;
+
+- (instancetype)initWithName:(NSString *)name;
 
 /**
  *  Queue a block to be run later. If the data structure has already
@@ -41,7 +44,7 @@ typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
  *  This message also transitions the data-structure to runImmediatly mode, whereby
  *  any future blocks will no longer be queued.
  */
-- (void)enQueueAllBlocksAndRun;
+- (void)enQueueAllBlocks;
 - (void)enQueueAllBlocksAndRunOnComplete:(void(^)(void))onComplete;
 
 /**
