@@ -32,11 +32,11 @@
     expect(self.queue).willNot.beNil();
 }
 
-- (void)testQueueHasAName {
+- (void)aQueueCanBeNamed {
     expect(self.queue.name).to.equal(@"TestName");
 }
 
-- (void)testQueueCanOutputDescription {
+- (void)itCanOutputAFullDescription {
     [self.queue queue:@"test1" shouldReplay:YES block:^{
         // do something
     }];
