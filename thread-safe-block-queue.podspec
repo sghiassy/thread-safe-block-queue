@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'thread-safe-block-queue'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'An opinionted thread-safe FIFO queue designed for blocks'
 
 # This description is used to generate tags and improve search results.
@@ -26,7 +26,7 @@ This class is an opinionted thread-safe FIFO queue designed for blocks. It takes
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Shaheen Ghiassy' => 'shaheen.ghiassy@gmail.com' }
   s.source           = { :git => 'https://github.com/sghiassy/thread-safe-block-queue.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/shaheenghiassy'
 
   s.ios.deployment_target = '8.0'
 

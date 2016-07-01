@@ -185,11 +185,11 @@
 
     [self.queue enQueueAllBlocksAndRunOnComplete:^{
         expect(called1).to.equal(1);
-//        expect(called2).to.equal(1);
-//        expect(called3).to.equal(1);
-//        expect(called4).to.equal(1);
-//        expect(called5).to.equal(1);
-//        expect(called6).to.equal(1);
+        expect(called2).to.equal(1);
+        expect(called3).to.equal(1);
+        expect(called4).to.equal(1);
+        expect(called5).to.equal(1);
+        expect(called6).to.equal(1);
 
         expect(count).to.equal(15.4f);
         NSLog(@"Replaying 1");
