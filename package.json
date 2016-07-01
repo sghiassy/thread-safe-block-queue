@@ -4,6 +4,7 @@
   "description": "This class is an opinionted thread-safe FIFO queue designed for blocks. It takes in blocks and queues them until it is messaged to purge and run all blocks. After the purge event, this data-structure will no longer queue future blocks and will instead run any block given to immediatly.",
   "main": "index.js",
   "scripts": {
+    "pod_publish": "pod trunk push thread-safe-block-queue.podspec",
     "test": "echo \"Error: no test specified\" && exit 1",
     "x": "XCODE=$(echo $(xcode-select -p) | awk 'BEGIN { FS = \".app\" } ; { print $1\".app\" }'); open \"$XCODE\" ./Example/thread-safe-block-queue.xcworkspace"
   },
