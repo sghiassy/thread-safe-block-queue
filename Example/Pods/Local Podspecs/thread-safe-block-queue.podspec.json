@@ -1,6 +1,6 @@
 {
   "name": "thread-safe-block-queue",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "summary": "An opinionted thread-safe FIFO queue designed for blocks",
   "description": "This class is an opinionted thread-safe FIFO queue designed for blocks. It takes in blocks and queues them until it is messaged to purge and run all blocks. After the purge event, this data-structure will no longer queue future blocks and will instead run any block given to immediatly.",
   "homepage": "https://github.com/sghiassy/thread-safe-block-queue",
@@ -12,9 +12,10 @@
     "Shaheen Ghiassy": "shaheen.ghiassy@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/thread-safe-block-queue.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/sghiassy/thread-safe-block-queue.git",
+    "tag": "0.1.1"
   },
+  "social_media_url": "https://twitter.com/shaheenghiassy",
   "platforms": {
     "ios": "8.0"
   },

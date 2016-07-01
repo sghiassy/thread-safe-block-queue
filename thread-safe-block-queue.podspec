@@ -26,7 +26,7 @@ This class is an opinionted thread-safe FIFO queue designed for blocks. It takes
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Shaheen Ghiassy' => 'shaheen.ghiassy@gmail.com' }
   s.source           = { :git => 'https://github.com/sghiassy/thread-safe-block-queue.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/shaheenghiassy'
 
   s.ios.deployment_target = '8.0'
 
@@ -38,5 +38,5 @@ This class is an opinionted thread-safe FIFO queue designed for blocks. It takes
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  # s.dependency 'thread-safe-block-queue', '~> 0.1.1'
 end
