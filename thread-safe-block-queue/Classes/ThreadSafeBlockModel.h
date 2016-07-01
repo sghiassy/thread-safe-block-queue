@@ -14,6 +14,7 @@ typedef void (^TSBlock)(void);
 
 - (instancetype)initWithName:(NSString *)name shouldReplay:(BOOL)shouldReplay andBlock:(TSBlock)block;
 
+@property (nonatomic, readonly, copy) NSString *name;
 @property (nonatomic, readonly, assign) BOOL shouldReplay;
 @property (nonatomic, readonly, copy) TSBlock block;
 

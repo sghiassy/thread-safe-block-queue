@@ -23,6 +23,7 @@ typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
  */
 @interface ThreadSafeBlockQueue : NSObject
 
+@property (nonatomic, readonly, copy) NSString *name;
 @property (atomic, readonly, assign) ThreadSafeBlockQueueStates currentState;
 
 /**

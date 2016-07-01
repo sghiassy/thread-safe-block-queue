@@ -12,7 +12,7 @@
 @interface ThreadSafeBlockQueue ()
 
 // Config
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, readwrite, copy) NSString *name;
 
 // Objects
 @property (nonatomic, strong) NSMutableArray *blocks;
@@ -153,6 +153,17 @@
 
     // Go!
     [self runLoopGo];
+}
+
+#pragma mark - Debugging
+
+- (NSString *)description {
+    NSString *description = [NSString stringWithFormat:@"Queue:%@", self.name];
+    for (NSUInteger i = 0; i < self.blocks.count; i++) {
+        ThreadSafeBlockModel *tsBlock = (ThreadSafeBlockModel *)[self.blocks objectAtIndex:i];
+        description = [NSString stringWithFormat:@"%@\nBlock:%@", description, tsBlock.name];
+    }
+    return description;
 }
 
 @end
