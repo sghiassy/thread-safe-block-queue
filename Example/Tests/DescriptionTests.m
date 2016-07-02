@@ -37,16 +37,16 @@
 }
 
 - (void)testItCanOutputAFullDescription {
-    [self.queue queue:@"test1" shouldReplay:YES block:^{
-        // do something
+    [self.queue queueBlock:@"test1" shouldReplay:YES withBlock:^{
+        //
     }];
 
-    [self.queue queue:@"test2" shouldReplay:YES block:^{
-        // do something
+    [self.queue queueBlock:@"test2" shouldReplay:YES withBlock:^{
+        //
     }];
 
-    [self.queue queue:@"test3" shouldReplay:YES block:^{
-        // do something
+    [self.queue queueBlock:@"test3" shouldReplay:YES withBlock:^{
+        //
     }];
 
     NSString *description = [self.queue description];

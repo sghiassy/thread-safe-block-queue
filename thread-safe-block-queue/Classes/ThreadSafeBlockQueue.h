@@ -11,8 +11,9 @@
 typedef void (^TSBlock)(void);
 
 typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
-    ThreadSafeBlockQueueStateStopped,
-    ThreadSafeBlockQueueStateRunning,
+    ThreadSafeBlockQueueStopped,
+    ThreadSafeBlockQueueRunning,
+    ThreadSafeBlockQueueRestarting
 };
 
 /**
@@ -26,10 +27,6 @@ typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
 @property (nonatomic, readonly, copy) NSString *name;
 @property (atomic, readonly, assign) ThreadSafeBlockQueueStates currentState;
 
-/**
- * Designated Initailzer
- * @param name is used for debugging
- */
 - (instancetype)initWithName:(NSString *)name;
 
 /**
@@ -41,15 +38,15 @@ typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
  */
 - (void)queueBlock:(TSBlock)block;
 - (void)queueBlock:(TSBlock)block shouldReplay:(BOOL)shouldReplay;
-- (void)queue:(NSString *)name shouldReplay:(BOOL)shouldReplay block:(TSBlock)block;
+- (void)queueBlock:(NSString *)name shouldReplay:(BOOL)shouldReplay withBlock:(TSBlock)block;
 
 /**
  *  Message the data-structure to run all blocks that are currently in the queue.
  *  This message also transitions the data-structure to run immediatly mode, whereby
  *  any future blocks will no longer be queued.
  */
-- (void)startQueue;
-- (void)startQueueOnComplete:(TSBlock)onComplete;
+- (void)enQueueAllBlocks;
+- (void)enQueueAllBlocksAndRunOnComplete:(TSBlock)onComplete;
 
 /**
  *  Message the data-structure to replay all blocks
