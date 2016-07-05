@@ -49,6 +49,11 @@ typedef NS_ENUM(NSUInteger, ThreadSafeBlockQueueStates) {
 - (void)enQueueAllBlocksAndRunOnComplete:(TSBlock)onComplete;
 
 /**
+ * Message the queue to suspend all operations
+ */
+- (void)suspendQueue;
+
+/**
  *  Message the data-structure to replay all blocks
  */
 - (void)replay;

@@ -604,10 +604,10 @@
 		DB4621969952ED33D56F3B71FD662D7D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E9F1D1F75C1D319440E18197C5770CC6 /* ThreadSafeBlockModel.h */,
-				B3A9C4E3253FBEF902721CB2BFDE47D9 /* ThreadSafeBlockModel.m */,
 				40D227062967ADE776E6B0CACCBC0A9A /* ThreadSafeBlockQueue.h */,
 				2B9ECF1F630015E93B92208EA95C2E92 /* ThreadSafeBlockQueue.m */,
+				E9F1D1F75C1D319440E18197C5770CC6 /* ThreadSafeBlockModel.h */,
+				B3A9C4E3253FBEF902721CB2BFDE47D9 /* ThreadSafeBlockModel.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

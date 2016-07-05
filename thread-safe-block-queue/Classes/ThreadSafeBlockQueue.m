@@ -18,10 +18,7 @@
 @property (nonatomic, strong) NSMutableArray *blocks;
 
 // Threads
-@property (nonatomic, strong) dispatch_queue_t serialQueue; // the queue that all operations are run on inside this datastructure
-
-// State
-@property (atomic, readwrite, assign) ThreadSafeBlockQueueStates currentState;
+@property (nonatomic, strong) NSOperationQueue *queue; // the queue that all operations are run on inside this datastructure
 
 @end
 
@@ -40,8 +37,8 @@
     if (self) {
         // Instantiate Objects
         _name = [name copy];
-        _currentState = ThreadSafeBlockQueueRunning;
-        _serialQueue = dispatch_queue_create("com.Groupon.ThreadSafeBlockQueue", DISPATCH_QUEUE_SERIAL);
+        _queue = [[NSOperationQueue alloc] init];
+        _queue.maxConcurrentOperationCount = 1;
         _blocks = [[NSMutableArray alloc] init];
 
         [self suspendQueue];
@@ -51,38 +48,26 @@
 }
 
 - (void)dealloc {
-    BOOL isStopped = self.currentState == ThreadSafeBlockQueueStopped;
-
-    // You can't dealloc a suspended queue: http://stackoverflow.com/a/9572316/1179897
-    if (isStopped) {
-        [self startQueue];
-    }
-
-    _serialQueue = nil;
+    [_queue cancelAllOperations];
+    _queue = nil;
 }
 
 #pragma mark - Start / Stop Methods
 
 - (void)startQueue {
-    BOOL alreadyRunning = self.currentState == ThreadSafeBlockQueueRunning;
-
-    if (alreadyRunning) {
-        return;
-    }
-
-    dispatch_resume(_serialQueue);
-    self.currentState = ThreadSafeBlockQueueRunning;
+    [self.queue setSuspended:NO];
 }
 
 - (void)suspendQueue {
-    BOOL alreadySuspended = self.currentState == ThreadSafeBlockQueueStopped;
+    [self.queue setSuspended:YES];
+}
 
-    if (alreadySuspended) {
-        return;
+- (ThreadSafeBlockQueueStates)currentState {
+    if (self.queue.isSuspended == YES) {
+        return ThreadSafeBlockQueueStopped;
+    } else {
+        return ThreadSafeBlockQueueRunning;
     }
-
-    dispatch_suspend(_serialQueue);
-    self.currentState = ThreadSafeBlockQueueStopped;
 }
 
 #pragma mark - Queue Methods
@@ -129,7 +114,7 @@
     //                   │   gcd_queue    │   gcd_queue    │
     //                   └────────────────┴────────────────┘
     if (!shouldReplay || !isRestarting) {
-        dispatch_async(self.serialQueue, block);
+        [self.queue addOperationWithBlock:block];
     }
 }
 
@@ -160,7 +145,6 @@
     }
 
     [self suspendQueue];
-    self.currentState = ThreadSafeBlockQueueRestarting; // override the state to restarting
 
     BOOL moreBlocksHaveBeenAdded = NO;
     NSUInteger count = self.blocks.count - 1;
@@ -169,7 +153,7 @@
     do {
         while (i <= count) {
             ThreadSafeBlockModel *tsBlock = (ThreadSafeBlockModel *)[self.blocks objectAtIndex:i];
-            dispatch_async(self.serialQueue, tsBlock.block);
+            [self.queue addOperationWithBlock:tsBlock.block];
             i++;
         }
 
