@@ -259,7 +259,7 @@
             count += 5.5f; // this shouldn't get run
         }];
         [self.queue queueBlock:^{
-            expect(count).to.equal(9.9f); // this block shouldn't get run
+            expect(count).to.equal(9.9f); // this block shouldn't get run too
         }];
 
         // Give the test 1 second to make sure the blocks aren't run
