@@ -36,4 +36,8 @@
     return self;
 }
 
+- (NSBlockOperation *)operation {
+    return [NSBlockOperation blockOperationWithBlock:self.block];
+}
+
 @end

@@ -30,7 +30,7 @@
 
 - (void)testItIsThreadSafe {
     XCTestExpectation *expectation = [self expectationWithDescription:@"High Expectations"];
-    dispatch_queue_t concurrentQueue = dispatch_queue_create("com.Groupon.ThreadSafeBlockQueue2", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_queue_t concurrentQueue = dispatch_queue_create("com.Groupon.ThreadSafeBlockQueue2", DISPATCH_QUEUE_SERIAL);
     dispatch_suspend(concurrentQueue);
 
     __block CGFloat count = -1.0f;

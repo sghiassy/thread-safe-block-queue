@@ -15,13 +15,10 @@
 @property (nonatomic, readwrite, copy) NSString *name;
 
 // Objects
-@property (nonatomic, strong) NSMutableArray *blocks;
+@property (nonatomic, strong) NSMutableArray *blocksToReplay;
 
 // Threads
-@property (nonatomic, strong) dispatch_queue_t serialQueue; // the queue that all operations are run on inside this datastructure
-
-// State
-@property (atomic, readwrite, assign) ThreadSafeBlockQueueStates currentState;
+@property (nonatomic, strong) NSOperationQueue *queue; // the queue that all operations are run on inside this datastructure
 
 @end
 
@@ -40,9 +37,9 @@
     if (self) {
         // Instantiate Objects
         _name = [name copy];
-        _currentState = ThreadSafeBlockQueueRunning;
-        _serialQueue = dispatch_queue_create("com.Groupon.ThreadSafeBlockQueue", DISPATCH_QUEUE_SERIAL);
-        _blocks = [[NSMutableArray alloc] init];
+        _queue = [[NSOperationQueue alloc] init];
+        _queue.maxConcurrentOperationCount = 1;
+        _blocksToReplay = [[NSMutableArray alloc] init];
 
         [self suspendQueue];
     }
@@ -51,38 +48,26 @@
 }
 
 - (void)dealloc {
-    BOOL isStopped = self.currentState == ThreadSafeBlockQueueStopped;
-
-    // You can't dealloc a suspended queue: http://stackoverflow.com/a/9572316/1179897
-    if (isStopped) {
-        [self startQueue];
-    }
-
-    _serialQueue = nil;
+    [_queue cancelAllOperations];
+    _queue = nil;
 }
 
 #pragma mark - Start / Stop Methods
 
 - (void)startQueue {
-    BOOL alreadyRunning = self.currentState == ThreadSafeBlockQueueRunning;
-
-    if (alreadyRunning) {
-        return;
-    }
-
-    dispatch_resume(_serialQueue);
-    self.currentState = ThreadSafeBlockQueueRunning;
+    self.queue.suspended = NO;
 }
 
 - (void)suspendQueue {
-    BOOL alreadySuspended = self.currentState == ThreadSafeBlockQueueStopped;
+    self.queue.suspended = YES;
+}
 
-    if (alreadySuspended) {
-        return;
+- (ThreadSafeBlockQueueStates)currentState {
+    if (self.queue.isSuspended == YES) {
+        return ThreadSafeBlockQueueStopped;
+    } else {
+        return ThreadSafeBlockQueueRunning;
     }
-
-    dispatch_suspend(_serialQueue);
-    self.currentState = ThreadSafeBlockQueueStopped;
 }
 
 #pragma mark - Queue Methods
@@ -104,9 +89,10 @@
 
     BOOL isRestarting = self.currentState == ThreadSafeBlockQueueRestarting;
 
+    ThreadSafeBlockModel *tsBlock = [[ThreadSafeBlockModel alloc] initWithName:name shouldReplay:shouldReplay andBlock:block];
+
     if (shouldReplay) {
-        ThreadSafeBlockModel *tsBlock = [[ThreadSafeBlockModel alloc] initWithName:name shouldReplay:shouldReplay andBlock:block];
-        [self.blocks addObject:tsBlock];
+        [self.blocksToReplay addObject:tsBlock];
     }
 
     // If we're currently in the process of restarting, then we don't need
@@ -129,7 +115,7 @@
     //                   │   gcd_queue    │   gcd_queue    │
     //                   └────────────────┴────────────────┘
     if (!shouldReplay || !isRestarting) {
-        dispatch_async(self.serialQueue, block);
+        [self.queue addOperation:tsBlock.operation];
     }
 }
 
@@ -160,22 +146,21 @@
     }
 
     [self suspendQueue];
-    self.currentState = ThreadSafeBlockQueueRestarting; // override the state to restarting
 
     BOOL moreBlocksHaveBeenAdded = NO;
-    NSUInteger count = self.blocks.count - 1;
+    NSUInteger count = self.blocksToReplay.count - 1;
     NSUInteger i = 0;
 
     do {
         while (i <= count) {
-            ThreadSafeBlockModel *tsBlock = (ThreadSafeBlockModel *)[self.blocks objectAtIndex:i];
-            dispatch_async(self.serialQueue, tsBlock.block);
+            ThreadSafeBlockModel *tsBlock = (ThreadSafeBlockModel *)[self.blocksToReplay objectAtIndex:i];
+            [self.queue addOperation:tsBlock.operation];
             i++;
         }
 
-        moreBlocksHaveBeenAdded = count < self.blocks.count - 1;
+        moreBlocksHaveBeenAdded = count < self.blocksToReplay.count - 1;
         i = count;
-        count = self.blocks.count - 1 - count;
+        count = self.blocksToReplay.count - 1 - count;
     } while (moreBlocksHaveBeenAdded == YES);
 
     [self startQueue];
@@ -186,8 +171,8 @@
 - (NSString *)description {
     NSString *description = [NSString stringWithFormat:@"Queue:%@", self.name];
 
-    for (NSUInteger i = 0; i < self.blocks.count; i++) {
-        ThreadSafeBlockModel *tsBlock = (ThreadSafeBlockModel *)[self.blocks objectAtIndex:i];
+    for (NSUInteger i = 0; i < self.blocksToReplay.count; i++) {
+        ThreadSafeBlockModel *tsBlock = (ThreadSafeBlockModel *)[self.blocksToReplay objectAtIndex:i];
         description = [NSString stringWithFormat:@"%@\nBlock:%@", description, tsBlock.name];
     }
 
