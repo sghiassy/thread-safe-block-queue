@@ -230,4 +230,51 @@
     }];
 }
 
+- (void)testTheQueueCanBeSuspended {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"High Expectations"];
+
+    __block CGFloat count = 0.0f;
+
+    [self.queue queueBlock:^{
+        expect(count).to.equal(0.0f);
+        count += 2.2f;
+    }];
+
+    [self.queue queueBlock:^{
+        expect(count).to.equal(2.2f);
+        count += 3.3f;
+    }];
+
+    [self.queue enQueueAllBlocks];
+
+    [self.queue queueBlock:^{
+        expect(count).to.equal(5.5f);
+        count += 4.4f;
+    }];
+
+    [self.queue enQueueAllBlocksAndRunOnComplete:^{
+        [self.queue suspendQueue];
+        [self.queue queueBlock:^{
+            expect(count).to.equal(9.9f); // this block shouldn't get run
+            count += 5.5f; // this shouldn't get run
+        }];
+        [self.queue queueBlock:^{
+            expect(count).to.equal(9.9f); // this block shouldn't get run too
+        }];
+
+        // Give the test 1 second to make sure the blocks aren't run
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            expect(count).to.equal(9.9f);
+            expect(count).toNot.equal(15.4f);
+            [expectation fulfill];
+        });
+    }];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Timeout Error: %@", error);
+        }
+    }];
+}
+
 @end
