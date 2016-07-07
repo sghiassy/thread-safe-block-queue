@@ -68,7 +68,7 @@
     [self.queue enQueueAllBlocks];
 }
 
-- (void)tesItWillRunBlocksInOrder {
+- (void)testItWillRunBlocksInOrder {
     __block CGFloat count = 0.0f;
 
     [self.queue queueBlock:^{
