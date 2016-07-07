@@ -50,6 +50,10 @@
     }];
 }
 
+- (void)testReplayWith0BlocksDoesntCrash {
+    [self.queue replay]; // https://github.com/sghiassy/thread-safe-block-queue/issues/10
+}
+
 - (void)testMessagingStartQueueMultipleTimesWillNotCrash {
     __block BOOL blockWasRun = NO;
 

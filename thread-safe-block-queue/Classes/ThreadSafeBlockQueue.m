@@ -148,8 +148,8 @@
     [self suspendQueue];
 
     BOOL moreBlocksHaveBeenAdded = NO;
-    NSUInteger count = self.blocksToReplay.count - 1;
-    NSUInteger i = 0;
+    NSInteger count = self.blocksToReplay.count - 1;
+    NSInteger i = 0;
 
     do {
         while (i <= count) {
